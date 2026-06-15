@@ -35,7 +35,6 @@ namespace Catalog.Data.Migrations
                         .HasColumnType("text[]");
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedAt")
