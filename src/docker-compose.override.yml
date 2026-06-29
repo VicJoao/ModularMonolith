@@ -10,3 +10,16 @@ services:
       - "5432:5432"
     volumes:
       - postgres_eshopdb:/var/lib/postgresql
+
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_FIRSTRUN_NOAUTHENTICATION: "True"
+    restart: unless-stopped
+    ports:
+      - "9091:80"
+      - "5341:5341"
+    volumes:
+      - seq_data:/data

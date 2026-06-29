@@ -15,7 +15,7 @@ internal class GetProductByIdHandler(CatalogDbContext dbContext)
                 .SingleOrDefaultAsync(p => p.Id == query.Id, cancellationToken);
         if (product is null)
         {
-            throw new Exception($"Not found: Product {query.Id}");
+            throw new ProductNotFoundException(query.Id);
         }
 
         var productDto = product.Adapt<ProductDto>();

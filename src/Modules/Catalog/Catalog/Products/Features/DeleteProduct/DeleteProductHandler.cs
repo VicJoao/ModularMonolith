@@ -1,11 +1,18 @@
-﻿using Catalog.Products.Features.UpdateProduct;
-
+﻿
 namespace Catalog.Products.Features.DeleteProduct;
 
 public record DeleteProductCommand(Guid ProductId)
     : ICommand<DeleteProductResult>;
 
 public record DeleteProductResult(bool IsSucess);
+
+public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
+{
+    public DeleteProductCommandValidator()
+    {
+        RuleFor(x => x.ProductId).NotEmpty().WithMessage("Product Id is required");
+    }
+}
 
 internal class DeleteProductHandler(CatalogDbContext dbContext)
     : ICommandHandler<DeleteProductCommand, DeleteProductResult>
@@ -17,7 +24,7 @@ internal class DeleteProductHandler(CatalogDbContext dbContext)
 
         if (product == null)
         {
-            throw new Exception($"Not found: Product {command.ProductId}");
+            throw new ProductNotFoundException(command.ProductId);
         }
 
         dbContext.Products.Remove(product);
