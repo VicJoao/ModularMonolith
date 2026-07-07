@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Basket\NewFolder\**" />
+    <EmbeddedResource Remove="Basket\NewFolder\**" />
+    <None Remove="Basket\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Basket\Features\CheckoutBasket\" />
+    <Folder Include="Basket\Features\UpdateItemPriceInBasket\" />
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
